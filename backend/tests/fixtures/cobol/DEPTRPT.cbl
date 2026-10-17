@@ -1,0 +1,25 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. DEPTRPT.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  WS-DEPT-CTR         PIC 9(2) VALUE 1.
+       01  WS-EMP-CTR          PIC 9(3) VALUE 1.
+       01  WS-TOTAL-DEPTS      PIC 9(2) VALUE 5.
+       01  WS-MAX-EMPS         PIC 9(3) VALUE 20.
+       01  WS-DEPT-SUM         PIC 9(7)V99 VALUE ZERO.
+
+       PROCEDURE DIVISION.
+       RUN-REPORT.
+           DISPLAY "STARTING DEPARTMENT REPORT"
+           PERFORM VARYING WS-DEPT-CTR FROM 1 BY 1
+               UNTIL WS-DEPT-CTR > WS-TOTAL-DEPTS
+               DISPLAY "PROCESSING DEPT: " WS-DEPT-CTR
+               MOVE ZERO TO WS-DEPT-SUM
+               PERFORM VARYING WS-EMP-CTR FROM 1 BY 1
+                   UNTIL WS-EMP-CTR > WS-MAX-EMPS
+                   ADD 150.50 TO WS-DEPT-SUM
+               END-PERFORM
+               DISPLAY "DEPT TOTAL: " WS-DEPT-SUM
+           END-PERFORM
+           DISPLAY "REPORT FINISHED"
+           STOP RUN.
